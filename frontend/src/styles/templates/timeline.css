@@ -1,0 +1,130 @@
+/* Timeline Template - vertical timeline with colored markers */
+.template-timeline .resume-document {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  padding: 40px 44px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Header */
+.template-timeline .personal-info {
+  text-align: center;
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--primary);
+}
+
+.template-timeline .resume-name {
+  font-family: var(--font-heading);
+  font-size: calc(28px * var(--font-scale, 1));
+  color: var(--primary);
+  margin: 0 0 6px 0;
+}
+
+.template-timeline .resume-job-title {
+  font-size: calc(15px * var(--font-scale, 1));
+  color: var(--accent);
+  margin: 0 0 10px 0;
+}
+
+.template-timeline .contact-row {
+  font-size: calc(13px * var(--font-scale, 1));
+  color: #777;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* Section header */
+.template-timeline .section {
+  margin-bottom: 22px;
+  position: relative;
+}
+
+.template-timeline .section-header h2 {
+  font-family: var(--font-heading);
+  font-size: calc(16px * var(--font-scale, 1));
+  color: var(--primary);
+  margin: 0 0 14px 0;
+  padding-left: 24px;
+  position: relative;
+}
+
+.template-timeline .section-header h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Entry timeline */
+.template-timeline .entry {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 16px;
+  border-left: 2px solid #e0e0e0;
+}
+
+.template-timeline .entry::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+.template-timeline .entry-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.template-timeline .entry-title-row strong {
+  font-size: calc(15px * var(--font-scale, 1));
+  color: var(--text);
+}
+
+.template-timeline .date {
+  font-size: calc(12px * var(--font-scale, 1));
+  color: #999;
+  white-space: nowrap;
+}
+
+.template-timeline .entry-subtitle {
+  font-size: calc(13px * var(--font-scale, 1));
+  color: var(--accent);
+  margin-top: 3px;
+}
+
+.template-timeline .entry-desc {
+  font-size: calc(13px * var(--font-scale, 1));
+  color: #666;
+  margin: 6px 0 0 0;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.template-timeline .entry-link {
+  font-size: calc(12px * var(--font-scale, 1));
+  color: var(--accent);
+}
+
+.template-timeline .skills-row {
+  font-size: calc(13px * var(--font-scale, 1));
+  margin-bottom: 8px;
+  line-height: 1.65;
+  color: #666;
+  padding-left: 24px;
+}

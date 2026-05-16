@@ -1,0 +1,97 @@
+.template-classic .resume-document {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  padding: 48px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.template-classic .personal-info {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--primary);
+}
+
+.template-classic .resume-name {
+  font-family: var(--font-heading);
+  font-size: calc(28px * var(--font-scale, 1));
+  color: var(--primary);
+  margin: 0 0 4px 0;
+}
+
+.template-classic .resume-job-title {
+  font-size: calc(16px * var(--font-scale, 1));
+  color: var(--accent);
+  margin: 0 0 8px 0;
+}
+
+.template-classic .contact-row {
+  font-size: calc(13px * var(--font-scale, 1));
+  color: #666;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.template-classic .section {
+  margin-bottom: 20px;
+}
+
+.template-classic .section-header h2 {
+  font-family: var(--font-heading);
+  font-size: calc(18px * var(--font-scale, 1));
+  color: var(--primary);
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+  margin: 0 0 10px 0;
+}
+
+.template-classic .entry {
+  margin-bottom: 12px;
+}
+
+.template-classic .entry-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.template-classic .entry-title-row strong {
+  font-size: calc(15px * var(--font-scale, 1));
+  color: var(--text);
+}
+
+.template-classic .date {
+  font-size: calc(13px * var(--font-scale, 1));
+  color: #888;
+  white-space: nowrap;
+}
+
+.template-classic .entry-subtitle {
+  font-size: calc(14px * var(--font-scale, 1));
+  color: #555;
+  margin-top: 2px;
+}
+
+.template-classic .entry-desc {
+  font-size: calc(14px * var(--font-scale, 1));
+  color: #555;
+  margin: 4px 0 0 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.template-classic .entry-link {
+  font-size: calc(13px * var(--font-scale, 1));
+  color: var(--accent);
+}
+
+.template-classic .skills-row {
+  font-size: calc(14px * var(--font-scale, 1));
+  margin-bottom: 6px;
+  line-height: 1.6;
+}

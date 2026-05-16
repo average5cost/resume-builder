@@ -1,0 +1,132 @@
+/* Card Template - modern card-based design with shadows and rounded corners */
+.template-card .resume-document {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: #f0f2f5;
+  padding: 32px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* Header card */
+.template-card .personal-info {
+  background: var(--primary);
+  color: #fff;
+  padding: 32px 36px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.template-card .resume-name {
+  font-family: var(--font-heading);
+  font-size: calc(30px * var(--font-scale, 1));
+  margin: 0 0 6px 0;
+  color: #fff;
+}
+
+.template-card .resume-job-title {
+  font-size: calc(16px * var(--font-scale, 1));
+  opacity: 0.9;
+  margin: 0 0 10px 0;
+  color: #fff;
+}
+
+.template-card .personal-info .contact-row {
+  font-size: calc(13px * var(--font-scale, 1));
+  opacity: 0.85;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.template-card .personal-info .contact-row span {
+  color: #fff;
+}
+
+/* Section cards */
+.template-card .section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.template-card .section-header h2 {
+  font-family: var(--font-heading);
+  font-size: calc(16px * var(--font-scale, 1));
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 14px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* Entries */
+.template-card .entry {
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.template-card .entry:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.template-card .entry-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.template-card .entry-title-row strong {
+  font-size: calc(15px * var(--font-scale, 1));
+  color: var(--text);
+}
+
+.template-card .date {
+  font-size: calc(12px * var(--font-scale, 1));
+  color: #999;
+  white-space: nowrap;
+  background: #f8f9fa;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.template-card .entry-subtitle {
+  font-size: calc(13px * var(--font-scale, 1));
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+.template-card .entry-desc {
+  font-size: calc(13px * var(--font-scale, 1));
+  color: #555;
+  margin: 6px 0 0 0;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.template-card .entry-link {
+  font-size: calc(12px * var(--font-scale, 1));
+  color: var(--accent);
+  margin-top: 4px;
+  display: inline-block;
+}
+
+.template-card .skills-row {
+  font-size: calc(13px * var(--font-scale, 1));
+  margin-bottom: 8px;
+  line-height: 1.65;
+  color: #555;
+}
+
+/* Empty hints inside cards */
+.template-card .section .empty-hint {
+  color: #ccc;
+  font-size: 13px;
+}

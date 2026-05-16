@@ -1,0 +1,44 @@
+{
+  "users": [],
+  "resumes": [],
+  "modules": [],
+  "templates": [
+    {
+      "id": "classic",
+      "name": "经典模板",
+      "description": "传统排版，适合大多数求职场景",
+      "config": "{\"primary\":\"#2c3e50\",\"accent\":\"#2980b9\",\"bg\":\"#ffffff\",\"text\":\"#333333\",\"fontHeading\":\"Georgia,serif\",\"fontBody\":\"Microsoft YaHei,sans-serif\"}"
+    },
+    {
+      "id": "modern",
+      "name": "现代模板",
+      "description": "简洁现代，适合互联网行业",
+      "config": "{\"primary\":\"#1a1a2e\",\"accent\":\"#e94560\",\"bg\":\"#ffffff\",\"text\":\"#333333\",\"fontHeading\":\"Helvetica,Arial,sans-serif\",\"fontBody\":\"Microsoft YaHei,sans-serif\"}"
+    },
+    {
+      "id": "minimal",
+      "name": "简约模板",
+      "description": "极简风格，适合设计类岗位",
+      "config": "{\"primary\":\"#000000\",\"accent\":\"#666666\",\"bg\":\"#ffffff\",\"text\":\"#444444\",\"fontHeading\":\"Helvetica,Arial,sans-serif\",\"fontBody\":\"Microsoft YaHei,sans-serif\"}"
+    },
+    {
+      "id": "compact",
+      "name": "紧凑模板",
+      "description": "高密度排版，字号紧凑间距小，适合内容丰富的简历",
+      "config": "{\"primary\":\"#1a3c5e\",\"accent\":\"#2980b9\",\"bg\":\"#ffffff\",\"text\":\"#333333\",\"fontHeading\":\"Georgia,serif\",\"fontBody\":\"Microsoft YaHei,sans-serif\"}"
+    },
+    {
+      "id": "timeline",
+      "name": "时间线模板",
+      "description": "垂直时间线设计，彩色标记点，适合经历丰富的求职者",
+      "config": "{\"primary\":\"#2c3e50\",\"accent\":\"#e74c3c\",\"bg\":\"#ffffff\",\"text\":\"#333333\",\"fontHeading\":\"Georgia,serif\",\"fontBody\":\"Microsoft YaHei,sans-serif\"}"
+    },
+    {
+      "id": "card",
+      "name": "卡片模板",
+      "description": "现代卡片式设计，圆角阴影，灰色背景白色卡片，适合互联网岗位",
+      "config": "{\"primary\":\"#1a3c5e\",\"accent\":\"#3498db\",\"bg\":\"#f0f2f5\",\"text\":\"#333333\",\"fontHeading\":\"Helvetica,Arial,sans-serif\",\"fontBody\":\"Microsoft YaHei,sans-serif\"}"
+    }
+  ],
+  "next_id": 1
+}
