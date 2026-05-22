@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import type { Module, Template } from '../../types/resume';
 import type {
   PersonalInfoData, EducationData, ProjectData, ResearchData,
@@ -10,6 +11,8 @@ interface Props {
   fontScale?: number;
   primaryColor?: string;
   accentColor?: string;
+  photoUrl?: string | null;
+  onPhotoChange?: (url: string | null) => void;
 }
 
 function safeParse<T extends object>(data: string, fallback: T): T {
@@ -37,26 +40,70 @@ function DescriptionList({ text }: { text: string }) {
   );
 }
 
-function PersonalInfoRenderer({ data }: { data: string }) {
+function PersonalInfoRenderer({ data, photoUrl, onPhotoChange }: { data: string; photoUrl?: string | null; onPhotoChange?: (url: string | null) => void }) {
   const d = safeParse<PersonalInfoData>(data, { name: '', email: '', phone: '', city: '', job_title: '', website: '', github: '', linkedin: '' });
   if (!d.name && !d.email) return null;
 
   const contactItems = [d.email, d.phone, d.city, d.website, d.github, d.linkedin].filter(Boolean);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => { fileRef.current?.click(); };
+
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    onPhotoChange?.(url);
+    e.target.value = '';
+  };
+
+  const handleRemove = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (photoUrl) URL.revokeObjectURL(photoUrl);
+    onPhotoChange?.(null);
+  };
 
   return (
     <div className="section personal-info" data-section="personal_info">
-      <h1 className="resume-name" data-name>{d.name || '姓名'}</h1>
-      {d.job_title && <p className="resume-job-title" data-job-title>{d.job_title}</p>}
-      {contactItems.length > 0 && (
-        <div className="contact-row" data-contact>
-          {contactItems.map((item, i) => (
-            <span key={i}>
-              {item}
-              {i < contactItems.length - 1 && <span className="contact-sep">|</span>}
-            </span>
-          ))}
+      <div className="personal-info-layout">
+        <div className="personal-info-left">
+          <h1 className="resume-name" data-name>{d.name || '姓名'}</h1>
+          {d.job_title && <p className="resume-job-title" data-job-title>{d.job_title}</p>}
+          {contactItems.length > 0 && (
+            <div className="contact-row" data-contact>
+              {contactItems.map((item, i) => (
+                <span key={i}>
+                  {item}
+                  {i < contactItems.length - 1 && <span className="contact-sep">|</span>}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
-      )}
+        <div className="personal-info-right">
+          <div
+            className={'photo-container' + (photoUrl ? ' has-photo' : '')}
+            onClick={handleClick}
+            title={photoUrl ? '点击更换证件照' : '点击上传证件照'}
+          >
+            {photoUrl ? (
+              <>
+                <img src={photoUrl} className="photo-img" alt="证件照" />
+                <button className="photo-remove" onClick={handleRemove} title="移除照片">&times;</button>
+              </>
+            ) : (
+              <span className="photo-placeholder">点击上传<br/>证件照</span>
+            )}
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/png,image/jpeg"
+              style={{ display: 'none' }}
+              onChange={handleFile}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -252,9 +299,9 @@ function HonorsRenderer({ data, continuation }: { data: string; continuation?: b
   );
 }
 
-function renderModule(m: Module) {
+function renderModule(m: Module, photoUrl?: string | null, onPhotoChange?: (url: string | null) => void) {
   switch (m.type) {
-    case 'personal_info': return <PersonalInfoRenderer key={m.id} data={m.data} />;
+    case 'personal_info': return <PersonalInfoRenderer key={m.id} data={m.data} photoUrl={photoUrl} onPhotoChange={onPhotoChange} />;
     case 'education': return <EducationRenderer key={m.id} data={m.data} continuation={m._continuation} />;
     case 'project': return <ProjectRenderer key={m.id} data={m.data} continuation={m._continuation} />;
     case 'research': return <ResearchRenderer key={m.id} data={m.data} continuation={m._continuation} />;
@@ -267,7 +314,7 @@ function renderModule(m: Module) {
   }
 }
 
-export default function ResumeRenderer({ modules, template, fontScale, primaryColor, accentColor }: Props) {
+export default function ResumeRenderer({ modules, template, fontScale, primaryColor, accentColor, photoUrl, onPhotoChange }: Props) {
   if (!modules.length) {
     return <div className="resume-empty">从左侧添加模块开始制作简历</div>;
   }
@@ -285,7 +332,7 @@ export default function ResumeRenderer({ modules, template, fontScale, primaryCo
 
   return (
     <div className="resume-document" style={style}>
-      {modules.map(renderModule)}
+      {modules.map((m) => renderModule(m, photoUrl, onPhotoChange))}
     </div>
   );
 }

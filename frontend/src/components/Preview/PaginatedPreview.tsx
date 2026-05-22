@@ -276,6 +276,7 @@ export default function PaginatedPreview({ modules, template, fontScale, primary
   const measureRef = useRef<HTMLDivElement>(null);
   const [pages, setPages] = useState<Module[][]>([modules]);
   const [key, setKey] = useState(0);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
 
   const splitPages = useCallback(() => {
     const c = measureRef.current;
@@ -322,7 +323,7 @@ export default function PaginatedPreview({ modules, template, fontScale, primary
       {/* Off-screen measurement — full ResumeRenderer = same DOM as visible */}
       <div ref={measureRef} className={tcls} style={{ position: 'absolute', visibility: 'hidden', pointerEvents: 'none', width: 794, top: 0, left: 0, zIndex: -1 }}>
         <div style={{ padding: `${PAD_Y}px ${PAD_X}px` }}>
-          <ResumeRenderer modules={modules} template={template} fontScale={fontScale} primaryColor={primaryColor} accentColor={accentColor} />
+          <ResumeRenderer modules={modules} template={template} fontScale={fontScale} primaryColor={primaryColor} accentColor={accentColor} photoUrl={photoUrl} onPhotoChange={setPhotoUrl} />
         </div>
       </div>
 
@@ -331,7 +332,7 @@ export default function PaginatedPreview({ modules, template, fontScale, primary
         {pages.map((pageMods, i) => (
           <div key={i} className={`a4-page ${tcls}`}>
             <div className="a4-page-inner">
-              <ResumeRenderer modules={pageMods} template={template} fontScale={fontScale} primaryColor={primaryColor} accentColor={accentColor} />
+              <ResumeRenderer modules={pageMods} template={template} fontScale={fontScale} primaryColor={primaryColor} accentColor={accentColor} photoUrl={photoUrl} onPhotoChange={setPhotoUrl} />
             </div>
             <span className="a4-page-number">{i + 1}</span>
           </div>
