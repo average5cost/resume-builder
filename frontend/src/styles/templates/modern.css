@@ -1,55 +1,60 @@
+/* Modern — Colored header bar, white text, accent-left section titles, bold sans-serif */
 .template-modern .resume-document {
   font-family: var(--font-body);
-  color: var(--text);
-  background: var(--bg);
-  padding: 40px;
-  max-width: 800px;
-  margin: 0 auto;
+  color: #222;
+  background: #fff;
+  padding: 0;
+  line-height: 1.6;
 }
 
 .template-modern .personal-info {
   background: var(--primary);
   color: #fff;
-  padding: 28px 32px;
-  margin: -40px -40px 24px -40px;
+  padding: 30px 36px;
+  margin: -4px 0 28px 0;
 }
 
 .template-modern .resume-name {
   font-family: var(--font-heading);
-  font-size: calc(30px * var(--font-scale, 1));
-  margin: 0 0 4px 0;
+  font-size: calc(32px * var(--font-scale, 1));
+  font-weight: 800;
+  margin: 0 0 6px 0;
   color: #fff;
 }
 
 .template-modern .resume-job-title {
   font-size: calc(16px * var(--font-scale, 1));
+  font-weight: 400;
   opacity: 0.9;
-  margin: 0 0 8px 0;
+  margin: 0 0 12px 0;
   color: #fff;
 }
 
 .template-modern .contact-row {
   font-size: calc(13px * var(--font-scale, 1));
-  opacity: 0.85;
+  opacity: 0.9;
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: 6px;
+  color: #fff;
 }
 
+.template-modern .contact-sep { margin: 0 12px; color: rgba(255,255,255,0.5); }
+
 .template-modern .section {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .template-modern .section-header h2 {
   font-family: var(--font-heading);
   font-size: calc(16px * var(--font-scale, 1));
+  font-weight: 700;
   color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-left: 3px solid var(--accent);
-  padding-left: 10px;
-  margin: 0 0 10px 0;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+  margin: 0 0 14px 0;
+  line-height: 1.3;
 }
 
 .template-modern .entry {
@@ -64,35 +69,37 @@
 
 .template-modern .entry-title-row strong {
   font-size: calc(15px * var(--font-scale, 1));
+  font-weight: 700;
+  color: #111;
 }
 
 .template-modern .date {
   font-size: calc(12px * var(--font-scale, 1));
-  color: #999;
+  color: #888;
   white-space: nowrap;
 }
 
 .template-modern .entry-subtitle {
-  font-size: calc(13px * var(--font-scale, 1));
+  font-size: calc(14px * var(--font-scale, 1));
   color: var(--accent);
+  font-weight: 500;
   margin-top: 2px;
 }
 
-.template-modern .entry-desc {
-  font-size: calc(14px * var(--font-scale, 1));
+.template-modern .entry-desc-list {
+  font-size: calc(13px * var(--font-scale, 1));
   color: #555;
-  margin: 4px 0 0 0;
   line-height: 1.6;
-  white-space: pre-wrap;
 }
 
 .template-modern .entry-link {
-  font-size: calc(13px * var(--font-scale, 1));
+  font-size: calc(12px * var(--font-scale, 1));
   color: var(--accent);
 }
 
 .template-modern .skills-row {
-  font-size: calc(14px * var(--font-scale, 1));
+  font-size: calc(13px * var(--font-scale, 1));
   margin-bottom: 6px;
   line-height: 1.6;
+  color: #555;
 }

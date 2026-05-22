@@ -24,23 +24,37 @@ function safeParse<T extends object>(data: string, fallback: T): T {
   }
 }
 
+function DescriptionList({ text }: { text: string }) {
+  if (!text) return null;
+  const lines = text.split('\n').filter((l) => l.trim());
+  if (lines.length === 0) return null;
+  return (
+    <ul className="entry-desc-list">
+      {lines.map((line, i) => (
+        <li key={i} data-desc-item>{line.trim()}</li>
+      ))}
+    </ul>
+  );
+}
+
 function PersonalInfoRenderer({ data }: { data: string }) {
   const d = safeParse<PersonalInfoData>(data, { name: '', email: '', phone: '', city: '', job_title: '', website: '', github: '', linkedin: '' });
-  if (!d.name && !d.email) return <p className="empty-hint">点击右侧编辑个人信息</p>;
+  if (!d.name && !d.email) return null;
+
+  const contactItems = [d.email, d.phone, d.city, d.website, d.github, d.linkedin].filter(Boolean);
+
   return (
-    <div className="section personal-info">
-      <h1 className="resume-name">{d.name || '姓名'}</h1>
-      {d.job_title && <p className="resume-job-title">{d.job_title}</p>}
-      <div className="contact-row">
-        {d.email && <span>{d.email}</span>}
-        {d.phone && <span>{d.phone}</span>}
-        {d.city && <span>{d.city}</span>}
-      </div>
-      {(d.website || d.github || d.linkedin) && (
-        <div className="contact-row">
-          {d.website && <span>{d.website}</span>}
-          {d.github && <span>{d.github}</span>}
-          {d.linkedin && <span>{d.linkedin}</span>}
+    <div className="section personal-info" data-section="personal_info">
+      <h1 className="resume-name" data-name>{d.name || '姓名'}</h1>
+      {d.job_title && <p className="resume-job-title" data-job-title>{d.job_title}</p>}
+      {contactItems.length > 0 && (
+        <div className="contact-row" data-contact>
+          {contactItems.map((item, i) => (
+            <span key={i}>
+              {item}
+              {i < contactItems.length - 1 && <span className="contact-sep">|</span>}
+            </span>
+          ))}
         </div>
       )}
     </div>
@@ -48,42 +62,54 @@ function PersonalInfoRenderer({ data }: { data: string }) {
 }
 
 function SectionHeader({ title }: { title: string }) {
-  return <div className="section-header"><h2>{title}</h2></div>;
+  return (
+    <div className="section-header" data-section-header>
+      <h2>{title}</h2>
+    </div>
+  );
 }
 
-function EducationRenderer({ data }: { data: string }) {
+function EducationRenderer({ data, continuation }: { data: string; continuation?: boolean }) {
   const d = safeParse<EducationData>(data, { entries: [] });
-  if (!d.entries.length) return <p className="empty-hint">暂无教育经历</p>;
+  if (!d.entries.length) return null;
   return (
-    <div className="section">
-      <SectionHeader title="教育经历" />
+    <div className="section" data-section>
+      {!continuation && <SectionHeader title="教育经历" />}
       {d.entries.map((e, i) => (
-        <div key={i} className="entry">
-          <div className="entry-title-row">
-            <strong>{e.school}</strong>
-            <span className="date">{e.start} - {e.end}</span>
-          </div>
-          <div className="entry-subtitle">{e.degree} · {e.major}{e.gpa ? ` · GPA ${e.gpa}` : ''}</div>
+        <div key={i} className="entry" data-entry>
+          {!e._continuation && (
+            <>
+              <div className="entry-title-row" data-entry-title>
+                <strong>{e.school}</strong>
+                <span className="date">{e.start} - {e.end}</span>
+              </div>
+              <div className="entry-subtitle" data-entry-subtitle>{e.degree}{e.major ? ` · ${e.major}` : ''}{e.gpa ? ` · GPA ${e.gpa}` : ''}</div>
+            </>
+          )}
         </div>
       ))}
     </div>
   );
 }
 
-function ProjectRenderer({ data }: { data: string }) {
+function ProjectRenderer({ data, continuation }: { data: string; continuation?: boolean }) {
   const d = safeParse<ProjectData>(data, { entries: [] });
-  if (!d.entries.length) return <p className="empty-hint">暂无项目经历</p>;
+  if (!d.entries.length) return null;
   return (
-    <div className="section">
-      <SectionHeader title="项目经历" />
+    <div className="section" data-section>
+      {!continuation && <SectionHeader title="项目经历" />}
       {d.entries.map((e, i) => (
-        <div key={i} className="entry">
-          <div className="entry-title-row">
-            <strong>{e.name}</strong>
-            <span className="date">{e.start} - {e.end}</span>
-          </div>
-          <div className="entry-subtitle">{e.role}</div>
-          {e.description && <p className="entry-desc">{e.description}</p>}
+        <div key={i} className="entry" data-entry>
+          {!e._continuation && (
+            <>
+              <div className="entry-title-row" data-entry-title>
+                <strong>{e.name}</strong>
+                <span className="date">{e.start} - {e.end}</span>
+              </div>
+              {e.role && <div className="entry-subtitle" data-entry-subtitle>{e.role}</div>}
+            </>
+          )}
+          <DescriptionList text={e.description} />
           {e.link && <a href={e.link} className="entry-link" target="_blank" rel="noopener">{e.link}</a>}
         </div>
       ))}
@@ -91,67 +117,75 @@ function ProjectRenderer({ data }: { data: string }) {
   );
 }
 
-function ResearchRenderer({ data }: { data: string }) {
+function ResearchRenderer({ data, continuation }: { data: string; continuation?: boolean }) {
   const d = safeParse<ResearchData>(data, { entries: [] });
-  if (!d.entries.length) return <p className="empty-hint">暂无研究经历</p>;
+  if (!d.entries.length) return null;
   return (
-    <div className="section">
-      <SectionHeader title="研究经历" />
+    <div className="section" data-section>
+      {!continuation && <SectionHeader title="研究经历" />}
       {d.entries.map((e, i) => (
-        <div key={i} className="entry">
-          <div className="entry-title-row">
-            <strong>{e.title}</strong>
-            <span className="date">{e.start} - {e.end}</span>
-          </div>
-          <div className="entry-subtitle">{e.institution} · {e.role}</div>
-          {e.description && <p className="entry-desc">{e.description}</p>}
+        <div key={i} className="entry" data-entry>
+          {!e._continuation && (
+            <>
+              <div className="entry-title-row" data-entry-title>
+                <strong>{e.title}</strong>
+                <span className="date">{e.start} - {e.end}</span>
+              </div>
+              <div className="entry-subtitle" data-entry-subtitle>{e.institution}{e.role ? ` · ${e.role}` : ''}</div>
+            </>
+          )}
+          <DescriptionList text={e.description} />
         </div>
       ))}
     </div>
   );
 }
 
-function InternshipRenderer({ data }: { data: string }) {
+function InternshipRenderer({ data, continuation }: { data: string; continuation?: boolean }) {
   const d = safeParse<InternshipData>(data, { entries: [] });
-  if (!d.entries.length) return <p className="empty-hint">暂无实习经历</p>;
+  if (!d.entries.length) return null;
   return (
-    <div className="section">
-      <SectionHeader title="实习经历" />
+    <div className="section" data-section>
+      {!continuation && <SectionHeader title="实习经历" />}
       {d.entries.map((e, i) => (
-        <div key={i} className="entry">
-          <div className="entry-title-row">
-            <strong>{e.company}</strong>
-            <span className="date">{e.start} - {e.end}</span>
-          </div>
-          <div className="entry-subtitle">{e.position}</div>
-          {e.description && <p className="entry-desc">{e.description}</p>}
+        <div key={i} className="entry" data-entry>
+          {!e._continuation && (
+            <>
+              <div className="entry-title-row" data-entry-title>
+                <strong>{e.company}</strong>
+                <span className="date">{e.start} - {e.end}</span>
+              </div>
+              {e.position && <div className="entry-subtitle" data-entry-subtitle>{e.position}</div>}
+            </>
+          )}
+          <DescriptionList text={e.description} />
         </div>
       ))}
     </div>
   );
 }
 
-function SkillsRenderer({ data }: { data: string }) {
+function SkillsRenderer({ data, continuation }: { data: string; continuation?: boolean }) {
   const d = safeParse<SkillsCertsData>(data, { skills: [], certificates: [], languages: [] });
   const hasContent = d.skills.length > 0 || d.certificates.length > 0 || d.languages.length > 0;
-  if (!hasContent) return <p className="empty-hint">暂无技能证书</p>;
+  if (!hasContent) return null;
   return (
-    <div className="section">
-      <SectionHeader title="技能证书" />
+    <div className="section" data-section>
+      {!continuation && <SectionHeader title="技能证书" />}
       {d.skills.length > 0 && (
-        <div className="skills-row">
+        <div className="skills-row" data-skills-row>
           <strong>技能：</strong>
           {d.skills.join('、')}
         </div>
       )}
       {d.certificates.length > 0 && (
-        <div className="skills-row">
+        <div className="skills-row" data-skills-row>
           <strong>证书：</strong>
           {d.certificates.map((c, i) => <span key={i}>{c.name}{c.date ? ` (${c.date})` : ''}{i < d.certificates.length - 1 ? '、' : ''}</span>)}
         </div>
       )}
       {d.languages.length > 0 && (
-        <div className="skills-row">
+        <div className="skills-row" data-skills-row>
           <strong>语言：</strong>
           {d.languages.map((l, i) => <span key={i}>{l.name} - {l.level}{i < d.languages.length - 1 ? '、' : ''}</span>)}
         </div>
@@ -160,50 +194,58 @@ function SkillsRenderer({ data }: { data: string }) {
   );
 }
 
-function SummaryRenderer({ data }: { data: string }) {
+function SummaryRenderer({ data, continuation }: { data: string; continuation?: boolean }) {
   const d = safeParse<PersonalSummaryData>(data, { content: '' });
-  if (!d.content) return <p className="empty-hint">暂无个人总结</p>;
+  if (!d.content) return null;
   return (
-    <div className="section">
-      <SectionHeader title="个人总结" />
-      <p className="entry-desc">{d.content}</p>
+    <div className="section" data-section>
+      {!continuation && <SectionHeader title="个人总结" />}
+      <DescriptionList text={d.content} />
     </div>
   );
 }
 
-function ClubRenderer({ data }: { data: string }) {
+function ClubRenderer({ data, continuation }: { data: string; continuation?: boolean }) {
   const d = safeParse<ClubOrgData>(data, { entries: [] });
-  if (!d.entries.length) return <p className="empty-hint">暂无社团经历</p>;
+  if (!d.entries.length) return null;
   return (
-    <div className="section">
-      <SectionHeader title="社团经历" />
+    <div className="section" data-section>
+      {!continuation && <SectionHeader title="社团经历" />}
       {d.entries.map((e, i) => (
-        <div key={i} className="entry">
-          <div className="entry-title-row">
-            <strong>{e.name}</strong>
-            <span className="date">{e.start} - {e.end}</span>
-          </div>
-          <div className="entry-subtitle">{e.role}</div>
-          {e.description && <p className="entry-desc">{e.description}</p>}
+        <div key={i} className="entry" data-entry>
+          {!e._continuation && (
+            <>
+              <div className="entry-title-row" data-entry-title>
+                <strong>{e.name}</strong>
+                <span className="date">{e.start} - {e.end}</span>
+              </div>
+              {e.role && <div className="entry-subtitle" data-entry-subtitle>{e.role}</div>}
+            </>
+          )}
+          <DescriptionList text={e.description} />
         </div>
       ))}
     </div>
   );
 }
 
-function HonorsRenderer({ data }: { data: string }) {
+function HonorsRenderer({ data, continuation }: { data: string; continuation?: boolean }) {
   const d = safeParse<HonorsAwardsData>(data, { entries: [] });
-  if (!d.entries.length) return <p className="empty-hint">暂无荣誉奖项</p>;
+  if (!d.entries.length) return null;
   return (
-    <div className="section">
-      <SectionHeader title="荣誉奖项" />
+    <div className="section" data-section>
+      {!continuation && <SectionHeader title="荣誉奖项" />}
       {d.entries.map((e, i) => (
-        <div key={i} className="entry">
-          <div className="entry-title-row">
-            <strong>{e.name}</strong>
-            <span className="date">{e.date}</span>
-          </div>
-          {e.issuer && <div className="entry-subtitle">{e.issuer}</div>}
+        <div key={i} className="entry" data-entry>
+          {!e._continuation && (
+            <>
+              <div className="entry-title-row" data-entry-title>
+                <strong>{e.name}</strong>
+                <span className="date">{e.date}</span>
+              </div>
+              {e.issuer && <div className="entry-subtitle" data-entry-subtitle>{e.issuer}</div>}
+            </>
+          )}
         </div>
       ))}
     </div>
@@ -213,14 +255,14 @@ function HonorsRenderer({ data }: { data: string }) {
 function renderModule(m: Module) {
   switch (m.type) {
     case 'personal_info': return <PersonalInfoRenderer key={m.id} data={m.data} />;
-    case 'education': return <EducationRenderer key={m.id} data={m.data} />;
-    case 'project': return <ProjectRenderer key={m.id} data={m.data} />;
-    case 'research': return <ResearchRenderer key={m.id} data={m.data} />;
-    case 'internship': return <InternshipRenderer key={m.id} data={m.data} />;
-    case 'skills_certs': return <SkillsRenderer key={m.id} data={m.data} />;
-    case 'personal_summary': return <SummaryRenderer key={m.id} data={m.data} />;
-    case 'club_org': return <ClubRenderer key={m.id} data={m.data} />;
-    case 'honors_awards': return <HonorsRenderer key={m.id} data={m.data} />;
+    case 'education': return <EducationRenderer key={m.id} data={m.data} continuation={m._continuation} />;
+    case 'project': return <ProjectRenderer key={m.id} data={m.data} continuation={m._continuation} />;
+    case 'research': return <ResearchRenderer key={m.id} data={m.data} continuation={m._continuation} />;
+    case 'internship': return <InternshipRenderer key={m.id} data={m.data} continuation={m._continuation} />;
+    case 'skills_certs': return <SkillsRenderer key={m.id} data={m.data} continuation={m._continuation} />;
+    case 'personal_summary': return <SummaryRenderer key={m.id} data={m.data} continuation={m._continuation} />;
+    case 'club_org': return <ClubRenderer key={m.id} data={m.data} continuation={m._continuation} />;
+    case 'honors_awards': return <HonorsRenderer key={m.id} data={m.data} continuation={m._continuation} />;
     default: return null;
   }
 }
@@ -232,12 +274,12 @@ export default function ResumeRenderer({ modules, template, fontScale, primaryCo
 
   const config = template ? safeParse<Record<string, string>>(template.config, {}) : {};
   const style = {
-    '--primary': primaryColor || config.primary || '#2c3e50',
-    '--accent': accentColor || config.accent || '#2980b9',
+    '--primary': primaryColor || config.primary || '#222222',
+    '--accent': accentColor || config.accent || '#555555',
     '--bg': config.bg || '#ffffff',
-    '--text': config.text || '#333333',
-    '--font-heading': config.fontHeading || 'Georgia, serif',
-    '--font-body': config.fontBody || 'Microsoft YaHei, sans-serif',
+    '--text': config.text || '#222222',
+    '--font-heading': config.fontHeading || 'var(--font-heading)',
+    '--font-body': config.fontBody || 'var(--font-sans)',
     '--font-scale': String(fontScale ?? 1),
   } as React.CSSProperties;
 

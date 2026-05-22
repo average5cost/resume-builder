@@ -7,13 +7,24 @@
 @import './templates/timeline.css';
 @import './templates/card.css';
 
+/* === Design Tokens === */
+:root {
+  --text-primary: #222222;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  --font-sans: 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font-heading: 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --line-height: 1.6;
+}
+
 /* === Reset & Base === */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  font-family: var(--font-sans);
   background: #f0f2f5;
-  color: #333;
+  color: var(--text-primary);
+  line-height: var(--line-height);
 }
 
 a { color: #2980b9; text-decoration: none; }
@@ -23,7 +34,7 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
 /* === Auth Pages === */
 .auth-page {
   display: flex; justify-content: center; align-items: center;
-  min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh; background: #e8ecf1;
 }
 
 .auth-card {
@@ -185,14 +196,41 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
 
 /* === Preview Panel (Center) === */
 .resume-preview-panel {
-  flex: 1; overflow-y: auto; background: #e8ecf1;
-  padding: 20px; display: flex; justify-content: center;
+  flex: 1; overflow-y: auto; background: #c4c9cf;
+  display: flex; justify-content: center;
 }
 
-.resume-preview {
-  background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-  width: 210mm; min-height: 297mm;
+/* === A4 Paginated Pages === */
+.a4-pages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 0;
+}
+
+.a4-page {
+  width: 794px;
+  height: 1123px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.1);
   border-radius: 2px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.a4-page-inner {
+  padding: 57px 76px;
+  height: 100%;
+}
+
+.a4-page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 16px;
+  font-size: 11px;
+  color: #ccc;
+  pointer-events: none;
 }
 
 .resume-empty {
@@ -263,14 +301,57 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
 }
 .status-message { padding: 12px; border-radius: 6px; margin: 12px 0; font-size: 14px; }
 
+/* === Shared Resume Styles === */
+.contact-sep {
+  margin: 0 10px;
+  color: #ccc;
+}
+
+.entry-desc-list {
+  margin: 4px 0 0 0;
+  padding-left: 20px;
+  list-style: disc;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.entry-desc-list li {
+  margin-bottom: 2px;
+}
+
 /* === Print / PDF === */
 @media print {
-  body * { visibility: hidden; }
-  #resume-preview, #resume-preview * { visibility: visible; }
-  #resume-preview {
-    position: absolute; left: 0; top: 0;
-    width: 100%; box-shadow: none; margin: 0; padding: 0;
+  @page {
+    size: A4;
+    margin: 0;
   }
-  .resume-preview { box-shadow: none; border-radius: 0; }
-  .resume-document .section-header { page-break-after: avoid; }
+
+  body * { visibility: hidden; }
+  .a4-page, .a4-page * { visibility: visible; }
+  .a4-page {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+    overflow: visible;
+    page-break-after: always;
+  }
+  .a4-page:last-child { page-break-after: auto; }
+  .a4-pages-container {
+    background: white;
+    padding: 0;
+    gap: 0;
+  }
+  .a4-page-number { display: none; }
+  .resume-preview-panel { background: white; overflow: visible; }
+
+  .section {
+    page-break-inside: avoid;
+  }
+
+  .entry {
+    page-break-inside: avoid;
+  }
 }

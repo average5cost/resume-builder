@@ -1,61 +1,60 @@
+/* Compact — Maximum density, tight spacing, smallest readable fonts, fits the most content */
 .template-compact .resume-document {
   font-family: var(--font-body);
-  color: var(--text);
-  background: var(--bg);
-  padding: 32px 36px;
-  max-width: 800px;
-  margin: 0 auto;
+  color: #222;
+  background: #fff;
+  padding: 0;
+  line-height: 1.35;
 }
 
-/* Header */
 .template-compact .personal-info {
   text-align: center;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1.5px solid var(--primary);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1.2px solid #333;
 }
 
 .template-compact .resume-name {
   font-family: var(--font-heading);
-  font-size: calc(22px * var(--font-scale, 1));
-  margin: 0 0 3px 0;
-  color: var(--primary);
+  font-size: calc(20px * var(--font-scale, 1));
+  font-weight: 700;
+  margin: 0 0 2px 0;
+  color: #111;
 }
 
 .template-compact .resume-job-title {
-  font-size: calc(13px * var(--font-scale, 1));
-  color: var(--accent);
-  margin: 0 0 6px 0;
+  font-size: calc(11px * var(--font-scale, 1));
+  color: #555;
+  margin: 0 0 4px 0;
 }
 
-.template-compact .personal-info .contact-row {
-  font-size: calc(11px * var(--font-scale, 1));
+.template-compact .contact-row {
+  font-size: calc(10px * var(--font-scale, 1));
   color: #777;
   display: flex;
   justify-content: center;
-  gap: 14px;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: 2px;
 }
 
-/* Sections */
+.template-compact .contact-sep { margin: 0 6px; color: #ccc; }
+
 .template-compact .section {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .template-compact .section-header h2 {
   font-family: var(--font-heading);
-  font-size: calc(14px * var(--font-scale, 1));
-  font-weight: 600;
-  color: var(--primary);
-  border-bottom: 1.5px solid var(--primary);
-  padding-bottom: 2px;
-  margin: 0 0 6px 0;
+  font-size: calc(12px * var(--font-scale, 1));
+  font-weight: 700;
+  color: #222;
+  border-bottom: 1.2px solid #333;
+  padding-bottom: 1px;
+  margin: 0 0 4px 0;
 }
 
-/* Entries */
 .template-compact .entry {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .template-compact .entry-title-row {
@@ -65,40 +64,43 @@
 }
 
 .template-compact .entry-title-row strong {
-  font-size: calc(13px * var(--font-scale, 1));
-  color: var(--text);
-  font-weight: 600;
+  font-size: calc(11.5px * var(--font-scale, 1));
+  font-weight: 700;
+  color: #111;
 }
 
 .template-compact .date {
-  font-size: calc(10.5px * var(--font-scale, 1));
+  font-size: calc(10px * var(--font-scale, 1));
   color: #888;
   white-space: nowrap;
 }
 
 .template-compact .entry-subtitle {
-  font-size: calc(11.5px * var(--font-scale, 1));
-  color: #666;
-  margin-top: 1px;
+  font-size: calc(10.5px * var(--font-scale, 1));
+  color: #555;
+  margin-top: 0;
 }
 
-.template-compact .entry-desc {
-  font-size: calc(11px * var(--font-scale, 1));
+.template-compact .entry-desc-list {
+  font-size: calc(10.5px * var(--font-scale, 1));
   color: #555;
-  margin: 2px 0 0 0;
-  line-height: 1.45;
-  white-space: pre-wrap;
+  line-height: 1.35;
+  margin-top: 1px;
+  padding-left: 16px;
+}
+
+.template-compact .entry-desc-list li {
+  margin-bottom: 0;
 }
 
 .template-compact .entry-link {
-  font-size: calc(10.5px * var(--font-scale, 1));
-  color: var(--accent);
+  font-size: calc(10px * var(--font-scale, 1));
+  color: #666;
 }
 
-/* Skills */
 .template-compact .skills-row {
-  font-size: calc(11px * var(--font-scale, 1));
-  margin-bottom: 3px;
-  line-height: 1.45;
+  font-size: calc(10.5px * var(--font-scale, 1));
+  margin-bottom: 2px;
+  line-height: 1.35;
   color: #555;
 }

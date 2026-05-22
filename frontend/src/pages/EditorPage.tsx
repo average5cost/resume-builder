@@ -20,7 +20,6 @@ export default function EditorPage() {
   const [fontScale, setFontScale] = useState(1.0);
   const [primaryColor, setPrimaryColor] = useState('');
   const [accentColor, setAccentColor] = useState('');
-  const [showPageBreaks, setShowPageBreaks] = useState(false);
   const [showPDFImport, setShowPDFImport] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -151,10 +150,10 @@ export default function EditorPage() {
             className="template-select"
             title="字体大小"
           >
-            <option value={0.85}>小号字体</option>
+            <option value={0.75}>小号字体</option>
             <option value={1.0}>标准字体</option>
-            <option value={1.15}>大号字体</option>
-            <option value={1.3}>特大字体</option>
+            <option value={1.25}>大号字体</option>
+            <option value={1.5}>特大字体</option>
           </select>
           <input
             type="color"
@@ -186,13 +185,6 @@ export default function EditorPage() {
             ))}
           </select>
           <button
-            onClick={() => setShowPageBreaks(!showPageBreaks)}
-            className={showPageBreaks ? 'btn-primary' : 'btn-sm'}
-            style={{ padding: '6px 10px', fontSize: '12px', whiteSpace: 'nowrap' }}
-          >
-            {showPageBreaks ? '隐藏分页' : '显示分页'}
-          </button>
-          <button
             onClick={() => setShowPDFImport(true)}
             className="btn-sm"
             style={{ padding: '6px 10px', fontSize: '12px', whiteSpace: 'nowrap' }}
@@ -218,7 +210,6 @@ export default function EditorPage() {
           fontScale={fontScale}
           primaryColor={primaryColor}
           accentColor={accentColor}
-          showPageBreaks={showPageBreaks}
         />
         <ModuleEditor
           module={selectedModule}

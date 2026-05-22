@@ -20,6 +20,7 @@ export interface Module {
   data: string;
   created_at: string;
   updated_at: string;
+  _continuation?: boolean;
 }
 
 export interface Template {

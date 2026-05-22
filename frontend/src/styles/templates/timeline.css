@@ -1,56 +1,61 @@
-/* Timeline Template - vertical timeline with colored markers */
+/* Timeline — Vertical timeline markers on each entry, distinct left-border with colored dots */
 .template-timeline .resume-document {
   font-family: var(--font-body);
-  color: var(--text);
-  background: var(--bg);
-  padding: 40px 44px;
-  max-width: 800px;
-  margin: 0 auto;
+  color: #222;
+  background: #fff;
+  padding: 0;
+  line-height: 1.6;
 }
 
-/* Header */
 .template-timeline .personal-info {
   text-align: center;
   margin-bottom: 28px;
   padding-bottom: 18px;
-  border-bottom: 2px solid var(--primary);
+  border-bottom: 3px solid var(--primary);
 }
 
 .template-timeline .resume-name {
   font-family: var(--font-heading);
-  font-size: calc(28px * var(--font-scale, 1));
-  color: var(--primary);
+  font-size: calc(30px * var(--font-scale, 1));
+  font-weight: 700;
+  color: #111;
   margin: 0 0 6px 0;
 }
 
 .template-timeline .resume-job-title {
   font-size: calc(15px * var(--font-scale, 1));
   color: var(--accent);
+  font-weight: 500;
   margin: 0 0 10px 0;
 }
 
 .template-timeline .contact-row {
   font-size: calc(13px * var(--font-scale, 1));
-  color: #777;
+  color: #888;
   display: flex;
   justify-content: center;
-  gap: 18px;
+  align-items: center;
   flex-wrap: wrap;
 }
 
-/* Section header */
+.template-timeline .contact-sep { margin: 0 10px; color: #ccc; }
+
 .template-timeline .section {
-  margin-bottom: 22px;
-  position: relative;
+  margin-bottom: 24px;
+}
+
+.template-timeline .section-header {
+  margin-bottom: 14px;
 }
 
 .template-timeline .section-header h2 {
   font-family: var(--font-heading);
   font-size: calc(16px * var(--font-scale, 1));
-  color: var(--primary);
-  margin: 0 0 14px 0;
-  padding-left: 24px;
+  font-weight: 700;
+  color: #111;
+  padding-left: 28px;
   position: relative;
+  margin: 0;
 }
 
 .template-timeline .section-header h2::before {
@@ -59,72 +64,73 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--accent);
 }
 
-/* Entry timeline */
 .template-timeline .entry {
   position: relative;
-  padding-left: 24px;
-  margin-bottom: 16px;
-  border-left: 2px solid #e0e0e0;
+  padding-left: 28px;
+  margin-bottom: 18px;
+  border-left: 3px solid #e8e8e8;
 }
 
 .template-timeline .entry::before {
   content: '';
   position: absolute;
-  left: -6px;
-  top: 4px;
-  width: 10px;
-  height: 10px;
+  left: -8px;
+  top: 5px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: var(--accent);
-  opacity: 0.5;
+  background: #fff;
+  border: 3px solid var(--accent);
 }
 
 .template-timeline .entry-title-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  margin-bottom: 2px;
 }
 
 .template-timeline .entry-title-row strong {
   font-size: calc(15px * var(--font-scale, 1));
-  color: var(--text);
+  font-weight: 700;
+  color: #111;
 }
 
 .template-timeline .date {
-  font-size: calc(12px * var(--font-scale, 1));
+  font-size: calc(11px * var(--font-scale, 1));
   color: #999;
   white-space: nowrap;
+  font-style: italic;
 }
 
 .template-timeline .entry-subtitle {
   font-size: calc(13px * var(--font-scale, 1));
   color: var(--accent);
-  margin-top: 3px;
+  font-weight: 500;
+  margin-top: 1px;
 }
 
-.template-timeline .entry-desc {
+.template-timeline .entry-desc-list {
   font-size: calc(13px * var(--font-scale, 1));
   color: #666;
-  margin: 6px 0 0 0;
-  line-height: 1.65;
-  white-space: pre-wrap;
+  line-height: 1.6;
 }
 
 .template-timeline .entry-link {
   font-size: calc(12px * var(--font-scale, 1));
-  color: var(--accent);
+  color: #888;
 }
 
 .template-timeline .skills-row {
   font-size: calc(13px * var(--font-scale, 1));
-  margin-bottom: 8px;
-  line-height: 1.65;
+  margin-bottom: 6px;
+  line-height: 1.6;
   color: #666;
-  padding-left: 24px;
+  padding-left: 28px;
 }

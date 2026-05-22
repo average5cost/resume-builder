@@ -1,59 +1,62 @@
+/* Minimal — Maximum whitespace, thin separators, lightweight, understated elegance */
 .template-minimal .resume-document {
   font-family: var(--font-body);
-  color: var(--text);
-  background: var(--bg);
-  padding: 44px;
-  max-width: 800px;
-  margin: 0 auto;
+  color: #333;
+  background: #fff;
+  padding: 0;
+  line-height: 1.8;
 }
 
 .template-minimal .personal-info {
-  margin-bottom: 28px;
+  margin-bottom: 36px;
 }
 
 .template-minimal .resume-name {
   font-family: var(--font-heading);
-  font-size: calc(32px * var(--font-scale, 1));
-  font-weight: 300;
-  color: var(--primary);
-  margin: 0 0 6px 0;
-  letter-spacing: 2px;
+  font-size: calc(34px * var(--font-scale, 1));
+  font-weight: 200;
+  color: #000;
+  margin: 0 0 10px 0;
+  letter-spacing: 3px;
 }
 
 .template-minimal .resume-job-title {
   font-size: calc(14px * var(--font-scale, 1));
-  color: var(--accent);
-  margin: 0 0 10px 0;
-  font-weight: 400;
+  color: #999;
+  margin: 0 0 14px 0;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
 
 .template-minimal .contact-row {
-  font-size: calc(13px * var(--font-scale, 1));
-  color: #999;
+  font-size: calc(12px * var(--font-scale, 1));
+  color: #bbb;
   display: flex;
-  gap: 14px;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: 4px;
 }
 
+.template-minimal .contact-sep { margin: 0 14px; color: #ddd; }
+
 .template-minimal .section {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .template-minimal .section-header h2 {
   font-family: var(--font-heading);
-  font-size: calc(14px * var(--font-scale, 1));
+  font-size: calc(12px * var(--font-scale, 1));
   font-weight: 600;
-  color: var(--primary);
+  color: #999;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0 0 12px 0;
-  padding-bottom: 6px;
+  letter-spacing: 3px;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
   border-bottom: 1px solid #eee;
 }
 
 .template-minimal .entry {
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
 .template-minimal .entry-title-row {
@@ -63,38 +66,38 @@
 }
 
 .template-minimal .entry-title-row strong {
-  font-size: calc(14px * var(--font-scale, 1));
+  font-size: calc(15px * var(--font-scale, 1));
   font-weight: 500;
+  color: #111;
 }
 
 .template-minimal .date {
-  font-size: calc(12px * var(--font-scale, 1));
-  color: #aaa;
+  font-size: calc(11px * var(--font-scale, 1));
+  color: #bbb;
   white-space: nowrap;
 }
 
 .template-minimal .entry-subtitle {
   font-size: calc(13px * var(--font-scale, 1));
-  color: #888;
+  color: #999;
   margin-top: 2px;
+  font-weight: 300;
 }
 
-.template-minimal .entry-desc {
+.template-minimal .entry-desc-list {
   font-size: calc(13px * var(--font-scale, 1));
-  color: #666;
-  margin: 4px 0 0 0;
-  line-height: 1.7;
-  white-space: pre-wrap;
+  color: #888;
+  line-height: 1.8;
 }
 
 .template-minimal .entry-link {
   font-size: calc(12px * var(--font-scale, 1));
-  color: #888;
+  color: #bbb;
 }
 
 .template-minimal .skills-row {
   font-size: calc(13px * var(--font-scale, 1));
-  margin-bottom: 6px;
-  line-height: 1.7;
-  color: #666;
+  margin-bottom: 8px;
+  line-height: 1.8;
+  color: #888;
 }
